@@ -1,0 +1,9 @@
+{
+  "name": "pokedexProject",
+  "version": "1.0.0",
+  "description": "Pokedex personalizada a mi gusto.",
+  "main": "index.js",
+  "repository": "git@github.com:hatashi199/pokedexProject.git",
+  "author": "hatashi199 <alejandromf_199@hotmail.com>",
+  "license": "MIT"
+}
