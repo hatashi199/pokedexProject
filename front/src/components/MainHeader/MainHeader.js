@@ -1,25 +1,14 @@
-import logoNav from '../../assets/imgs/logo.png';
-import { BiSearch } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import logoNav from '../../assets/imgs/mainLogo.svg';
+import MenuOptions from '../MenuOptions/MenuOptions';
 
 const MainHeader = () => {
     return (
         <>
-            <header>
+            <header className='posRel'>
                 <figure>
                     <img src={logoNav} alt='logo-pokeAMF' />
                 </figure>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to='/'>Inicio</Link>
-                        </li>
-                        <li>
-                            <Link to='/'>Pokédex</Link>
-                        </li>
-                    </ul>
-                </nav>
-                <BiSearch size='2.5rem' color='#FFFFFF' />
+                <MenuOptions />
             </header>
         </>
     );

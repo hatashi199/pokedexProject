@@ -1,0 +1,21 @@
+.pokeInfoComplete {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 30% 60%;
+    align-items: flex-start;
+    padding: 4rem 0rem;
+    gap: 3.5rem;
+}
+
+.pokeInfoComplete > figure {
+    /* position: sticky;
+    top: 0; */
+    border-radius: 6px;
+    box-shadow: var(--small-shadow);
+    width: 100%;
+}
+
+.pokeInfoComplete > figure > img {
+    display: block;
+    width: 100%;
+}

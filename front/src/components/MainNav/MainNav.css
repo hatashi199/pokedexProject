@@ -1,0 +1,27 @@
+.slideRightMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 9999;
+    background-color: var(--color-red);
+    box-shadow: var(--small-shadow);
+    height: 100vh;
+}
+
+.slideRightMenu > ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.slideRightMenu > ul > li a {
+    display: block;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    text-align: left;
+    color: var(--color-white);
+    border-top: 1px solid var(--color-white);
+}
+
+.slideRightMenu > ul > li a:hover {
+    background-color: var(--color-white);
+    color: var(--color-red);
+}

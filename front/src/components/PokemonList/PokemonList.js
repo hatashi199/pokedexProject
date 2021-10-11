@@ -1,21 +1,32 @@
-import useGen from '../../hooks/useGen/useGen';
+import usePokeList from '../../hooks/usePokeList';
+import PokeSprite from '../PokeSprite/PokeSprite';
+import { Link } from 'react-router-dom';
 
 const PokemonList = () => {
-    const { pokeGen } = useGen(3);
+    const { pokeList } = usePokeList(1);
 
     return (
-        <div>
-            {pokeGen &&
-                pokeGen.map(({ name, sprites }) => (
-                    <figure key={name}>
-                        <img
-                            src={sprites?.front_default}
-                            alt='sprite_pokemon'
-                        />
-                        <figcaption>{name}</figcaption>
-                    </figure>
-                ))}
-        </div>
+        <section className='pokedexBox'>
+            <h2>{pokeList.pokedexName}</h2>
+            <div className='pokemonList center'>
+                {pokeList &&
+                    pokeList?.dataPokemon?.map((pokemon) => {
+                        return (
+                            <Link
+                                key={pokemon?.entry_number}
+                                to={{
+                                    pathname: `/pokemons/${pokemon.namePokemon}`,
+                                    state: {
+                                        infoPokemon: pokemon,
+                                    },
+                                }}
+                            >
+                                <PokeSprite dataPokemon={pokemon} />
+                            </Link>
+                        );
+                    })}
+            </div>
+        </section>
     );
 };
 

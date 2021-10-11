@@ -1,0 +1,16 @@
+.pokemonType_s {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.pokemonType_s > div {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.pokemonType_s > div > span {
+    text-transform: capitalize;
+    font-size: 1.2rem;
+}

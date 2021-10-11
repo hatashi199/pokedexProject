@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import mainImg from '../../assets/imgs/mainImg.svg';
+import mainImg from '../../assets/imgs/mainLogo.svg';
 import ButtonLink from '../ButtonLink/ButtonLink';
+import { RiArrowRightSLine } from 'react-icons/ri';
 
 const TitleSection = () => {
     return (
@@ -9,10 +10,13 @@ const TitleSection = () => {
                 <figure>
                     <img src={mainImg} alt='mainImg' />
                 </figure>
-                <h1>Pokédex Personal</h1>
-                <span>Realizado por Alejandro Mariño Fandiño</span>
-                <ButtonLink white>
-                    <Link to='/pokemons'>Ir a la Pokédex</Link>
+                <h1>Personal Pokédex</h1>
+                <span>Made by Alejandro Mariño Fandiño</span>
+                <ButtonLink white marTop>
+                    <Link to='/pokemons'>
+                        Pokédex
+                        <RiArrowRightSLine size='2.5rem' />
+                    </Link>
                 </ButtonLink>
             </div>
             <div className='bgArea'>
