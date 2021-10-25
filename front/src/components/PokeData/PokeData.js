@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import AboutPokesection from '../AboutPokesection/AboutPokesection';
 import BaseStatsPokesection from '../BaseStatsPokesection/BaseStatsPokesection';
-import PokeTypes from '../PokeTypes/PokeTypes';
+import EvoPokesection from '../EvoPokesection/EvoPokesection';
 
-const PokeData = ({ dataPokemon }) => {
+const PokeData = ({ dataPokemon, dataSpecie }) => {
     const [contentActive, setContentActive] = useState({
         about: true,
         baseStats: false,
@@ -18,10 +18,6 @@ const PokeData = ({ dataPokemon }) => {
 
     return (
         <div className='pokeData_Box'>
-            <header>
-                <h3>{dataPokemon.namePokemon}</h3>
-                <PokeTypes dataTypes={dataPokemon.normal_form.types} />
-            </header>
             <ul>
                 <li
                     style={contentActive.about ? pokesectionActive : null}
@@ -95,10 +91,16 @@ const PokeData = ({ dataPokemon }) => {
                 </li>
             </ul>
             {contentActive.about && (
-                <AboutPokesection dataAbout={dataPokemon} />
+                <AboutPokesection
+                    dataAboutPoke={dataPokemon}
+                    dataAboutSpecie={dataSpecie}
+                />
             )}
             {contentActive.baseStats && (
-                <BaseStatsPokesection dataStats={dataPokemon} />
+                <BaseStatsPokesection dataStatsPoke={dataPokemon} />
+            )}
+            {contentActive.evolution && (
+                <EvoPokesection dataEvoSpecie={dataSpecie} />
             )}
         </div>
     );

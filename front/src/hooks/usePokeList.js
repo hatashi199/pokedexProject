@@ -29,6 +29,7 @@ const usePokeList = (num) => {
                             is_baby,
                             is_legendary,
                             is_mythical,
+                            evolution_chain,
                         } = await getAxios(pokemon_species.url);
 
                         // Normal Form
@@ -144,6 +145,7 @@ const usePokeList = (num) => {
                             namePokemon: pokemon_species.name,
                             genus,
                             descriptionPokedex: descPokedex,
+                            evoChain: evolution_chain.url,
                             is_baby,
                             is_legendary,
                             is_mythical,

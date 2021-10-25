@@ -40,6 +40,24 @@
     color: var(--color-light-black);
 }
 
+.genderBar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.male,
+.female {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.male > span,
+.female > span {
+    display: block;
+}
+
 .aboutSection_Shiny {
     display: flex;
     flex-direction: column;

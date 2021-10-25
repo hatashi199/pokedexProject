@@ -1,24 +1,25 @@
-import usePokeList from '../../hooks/usePokeList';
+import usePokedexList from '../../hooks/usePokedexList';
 import PokeSprite from '../PokeSprite/PokeSprite';
 import { Link } from 'react-router-dom';
 
 const PokemonList = () => {
-    const { pokeList } = usePokeList(1);
+    const { pokemonPokedex } = usePokedexList(1);
+
+    console.log(pokemonPokedex);
 
     return (
         <section className='pokedexBox'>
-            <h2>{pokeList.pokedexName}</h2>
+            <h2>
+                {pokemonPokedex && pokemonPokedex?.namePokedex + ' Pokedex'}
+            </h2>
             <div className='pokemonList center'>
-                {pokeList &&
-                    pokeList?.dataPokemon?.map((pokemon) => {
+                {pokemonPokedex &&
+                    pokemonPokedex?.pokemons?.map((pokemon) => {
                         return (
                             <Link
-                                key={pokemon?.entry_number}
+                                key={pokemon.entry_number}
                                 to={{
-                                    pathname: `/pokemons/${pokemon.namePokemon}`,
-                                    state: {
-                                        infoPokemon: pokemon,
-                                    },
+                                    pathname: `/pokemons/${pokemon.pokemon_species.name}`,
                                 }}
                             >
                                 <PokeSprite dataPokemon={pokemon} />

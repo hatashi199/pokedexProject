@@ -1,26 +1,19 @@
-import PokeTypes from '../PokeTypes/PokeTypes';
-
 const PokeSprite = ({ dataPokemon }) => {
-    const mainType = dataPokemon?.normal_form.types
-        .filter((uniqueType) => uniqueType.slot === 1)
-        .map(({ type }) => type.name)
-        .join('');
+    const pokedexNumber =
+        dataPokemon.entry_number < 10
+            ? `#00${dataPokemon.entry_number}`
+            : dataPokemon.entry_number < 100
+            ? `#0${dataPokemon.entry_number}`
+            : `#${dataPokemon.entry_number}`;
 
     return (
-        <div className={mainType + ' boxSprite'}>
-            <figure key={dataPokemon?.namePokemon}>
-                <img
-                    src={
-                        dataPokemon?.normal_form.sprites.other[
-                            'official-artwork'
-                        ].front_default
-                    }
-                    alt='sprite_pokemon'
-                />
+        <div className='boxSprite'>
+            <figure key={dataPokemon.sprite}>
+                <img src={dataPokemon.sprite} alt='sprite_pokemon' />
             </figure>
             <div className='boxSprite_Info'>
-                <h3>{dataPokemon?.namePokemon}</h3>
-                <PokeTypes dataTypes={dataPokemon.normal_form.types} />
+                <span>{pokedexNumber}</span>
+                <h3>{dataPokemon.pokemon_species.name}</h3>
             </div>
         </div>
     );

@@ -5,6 +5,7 @@
     border-radius: 6px;
     box-shadow: var(--small-shadow);
     gap: 1rem;
+    background-color: var(--color-red);
     cursor: pointer;
 }
 
