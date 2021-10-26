@@ -1,59 +1,61 @@
-import PokeData from '../PokeData/PokeData';
-import { useParams } from 'react-router-dom';
-import PokeTypes from '../PokeTypes/PokeTypes';
-import usePokeinfo from '../../hooks/usePokeinfo';
+import PokeData from "../PokeData/PokeData";
+import { useParams } from "react-router-dom";
+import PokeTypes from "../PokeTypes/PokeTypes";
+import { useEffect, useState } from "react";
+import { getAxios } from "../../helpers";
 
 const InfoCompletePokemon = () => {
-    const { pokeName } = useParams();
+  const { pokeName } = useParams();
 
-    const pokemon = usePokeinfo(
-        `https://pokeapi.co/api/v2/pokemon/${pokeName}`
-    );
-    const specie = usePokeinfo(
-        `https://pokeapi.co/api/v2/pokemon-species/${pokeName}`
-    );
+  const [pokemonData, setPokemonData] = useState([]);
+  const [specieData, setSpecieData] = useState([]);
 
-    const mainType = pokemon?.pokemonInfo?.types
-        .filter((uniqueType) => uniqueType.slot === 1)
-        .map(({ type }) => type.name)
-        .join('');
+  useEffect(() => {
+    const getPokemonData = async () => {
+      try {
+        const pokemon = await getAxios(
+          `https://pokeapi.co/api/v2/pokemon/${pokeName}`
+        );
+        setPokemonData(pokemon);
 
-    return (
-        <>
-            <section className='pokeInfoComplete center'>
-                {pokemon && (
-                    <>
-                        <section className='pokeInfo_Card'>
-                            <figure className={mainType}>
-                                <img
-                                    src={
-                                        pokemon.pokemonInfo?.sprites.other[
-                                            'official-artwork'
-                                        ].front_default
-                                    }
-                                    alt='sprite_pokemon'
-                                />
-                            </figure>
-                            <footer>
-                                <h3>{specie.pokemonInfo?.name}</h3>
-                                <PokeTypes
-                                    dataTypes={pokemon.pokemonInfo?.types}
-                                />
-                            </footer>
-                        </section>
-                        {pokemon && specie && (
-                            <PokeData
-                                dataPokemon={pokemon.pokemonInfo}
-                                dataSpecie={specie.pokemonInfo}
-                            />
-                        )}
-                    </>
-                )}
-            </section>
-            {!pokemon && <h1>{pokemon.error}</h1>}
-            {!specie && <h1>{specie.error}</h1>}
-        </>
-    );
+        const specie = await getAxios(
+          `https://pokeapi.co/api/v2/pokemon-species/${pokeName}`
+        );
+        setSpecieData(specie);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPokemonData();
+  }, [pokeName]);
+
+  console.log(pokemonData);
+
+  return (
+    <>
+      {pokemonData && (
+        <section className="pokeInfoComplete center">
+          <section className="pokeInfo_Card">
+            <figure className={pokemonData?.types[0]?.type?.name}>
+              <img
+                src={
+                  pokemonData?.sprites.other["official-artwork"].front_default
+                }
+                alt="sprite_pokemon"
+              />
+            </figure>
+            <footer>
+              <h3>{specieData.name}</h3>
+              <PokeTypes dataTypes={pokemonData?.types} />
+            </footer>
+          </section>
+          {pokemonData && (
+            <PokeData dataPokemon={pokemonData} dataSpecie={specieData} />
+          )}
+        </section>
+      )}
+    </>
+  );
 };
 
 export default InfoCompletePokemon;
