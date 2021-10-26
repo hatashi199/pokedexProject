@@ -9,7 +9,10 @@ const PokeSprite = ({ dataPokemon }) => {
     return (
         <div className='boxSprite'>
             <figure key={dataPokemon.sprite}>
-                <img src={dataPokemon.sprite} alt='sprite_pokemon' />
+                <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dataPokemon.entry_number}.png`}
+                    alt='sprite_pokemon'
+                />
             </figure>
             <div className='boxSprite_Info'>
                 <span>{pokedexNumber}</span>

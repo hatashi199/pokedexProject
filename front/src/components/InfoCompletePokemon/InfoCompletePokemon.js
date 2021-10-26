@@ -1,47 +1,58 @@
 import PokeData from '../PokeData/PokeData';
 import { useParams } from 'react-router-dom';
-import usePokemonData from '../../hooks/usePokemonData';
-import useSpecieData from '../../hooks/useSpecieData';
 import PokeTypes from '../PokeTypes/PokeTypes';
+import usePokeinfo from '../../hooks/usePokeinfo';
 
 const InfoCompletePokemon = () => {
     const { pokeName } = useParams();
 
-    const { infoPokemon } = usePokemonData(pokeName);
-    const { infoSpecie } = useSpecieData(pokeName);
+    const pokemon = usePokeinfo(
+        `https://pokeapi.co/api/v2/pokemon/${pokeName}`
+    );
+    const specie = usePokeinfo(
+        `https://pokeapi.co/api/v2/pokemon-species/${pokeName}`
+    );
 
-    const mainType = infoPokemon?.types
+    const mainType = pokemon?.pokemonInfo?.types
         .filter((uniqueType) => uniqueType.slot === 1)
         .map(({ type }) => type.name)
         .join('');
 
     return (
-        <section className='pokeInfoComplete center'>
-            {infoPokemon && (
-                <>
-                    <section className='pokeInfo_Card'>
-                        <figure className={mainType}>
-                            <img
-                                src={
-                                    infoPokemon?.sprites.other[
-                                        'official-artwork'
-                                    ].front_default
-                                }
-                                alt='sprite_pokemon'
+        <>
+            <section className='pokeInfoComplete center'>
+                {pokemon && (
+                    <>
+                        <section className='pokeInfo_Card'>
+                            <figure className={mainType}>
+                                <img
+                                    src={
+                                        pokemon.pokemonInfo?.sprites.other[
+                                            'official-artwork'
+                                        ].front_default
+                                    }
+                                    alt='sprite_pokemon'
+                                />
+                            </figure>
+                            <footer>
+                                <h3>{specie.pokemonInfo?.name}</h3>
+                                <PokeTypes
+                                    dataTypes={pokemon.pokemonInfo?.types}
+                                />
+                            </footer>
+                        </section>
+                        {pokemon && specie && (
+                            <PokeData
+                                dataPokemon={pokemon.pokemonInfo}
+                                dataSpecie={specie.pokemonInfo}
                             />
-                        </figure>
-                        <footer>
-                            <h3>{infoSpecie?.name}</h3>
-                            <PokeTypes dataTypes={infoPokemon?.types} />
-                        </footer>
-                    </section>
-                    <PokeData
-                        dataPokemon={infoPokemon}
-                        dataSpecie={infoSpecie}
-                    />
-                </>
-            )}
-        </section>
+                        )}
+                    </>
+                )}
+            </section>
+            {!pokemon && <h1>{pokemon.error}</h1>}
+            {!specie && <h1>{specie.error}</h1>}
+        </>
     );
 };
 

@@ -3,20 +3,19 @@ import useEvolution from '../../hooks/useEvolution';
 const EvoPokesection = ({ dataEvoSpecie }) => {
     const { evo } = useEvolution(dataEvoSpecie?.evolution_chain.url);
 
-    console.log(evo);
     return (
         <section>
-            {evo &&
-                evo.map(({ name, sprite }) => {
+            {/* {evo &&
+                evo.map((item) => {
                     return (
-                        <div key={name}>
-                            <span>{name}</span>
+                        <div key={item.name}>
+                            <span>{item.name}</span>
                             <figure>
-                                <img src={sprite} alt='pokePic' />
+                                <img src={item.sprite} alt='pokePic' />
                             </figure>
                         </div>
                     );
-                })}
+                })} */}
         </section>
     );
 };
