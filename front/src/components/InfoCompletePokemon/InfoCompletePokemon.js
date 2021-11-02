@@ -5,21 +5,21 @@ import { useEffect, useState } from "react";
 import { getAxios } from "../../helpers";
 
 const InfoCompletePokemon = () => {
-  const { pokeName } = useParams();
+  const { pokeId } = useParams();
 
-  const [pokemonData, setPokemonData] = useState([]);
-  const [specieData, setSpecieData] = useState([]);
+  const [pokemonData, setPokemonData] = useState("");
+  const [specieData, setSpecieData] = useState("");
 
   useEffect(() => {
     const getPokemonData = async () => {
       try {
         const pokemon = await getAxios(
-          `https://pokeapi.co/api/v2/pokemon/${pokeName}`
+          `https://pokeapi.co/api/v2/pokemon/${pokeId}`
         );
         setPokemonData(pokemon);
 
         const specie = await getAxios(
-          `https://pokeapi.co/api/v2/pokemon-species/${pokeName}`
+          `https://pokeapi.co/api/v2/pokemon-species/${pokeId}`
         );
         setSpecieData(specie);
       } catch (error) {
@@ -27,9 +27,7 @@ const InfoCompletePokemon = () => {
       }
     };
     getPokemonData();
-  }, [pokeName]);
-
-  console.log(pokemonData);
+  }, [pokeId]);
 
   return (
     <>

@@ -1,0 +1,19 @@
+a {
+  color: red;
+}
+
+.boxSmall {
+  color: blue;
+}
+
+#id {
+  color: yellow;
+}
+
+input[type="text"] {
+  border: 1px dotted black;
+}
+
+div .boxRed > #primero {
+  color: black;
+}

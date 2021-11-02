@@ -1,0 +1,8 @@
+.movesTableData td {
+  vertical-align: middle;
+  padding: 1rem;
+}
+
+.moveName {
+  text-transform: capitalize;
+}

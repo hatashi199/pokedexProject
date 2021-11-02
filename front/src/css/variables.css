@@ -1,30 +1,31 @@
 :root {
-    --color-red: #c0392b;
-    --color-white: #ffffff;
-    --color-light-grey: #efefef;
-    --color-light-black: #787c81;
-    --color-black: #2c3337;
-    --bg-transparent: rgba(0, 0, 0, 0.75);
-    --small-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --color-red: #c0392b;
+  --color-white: #ffffff;
+  --color-light-grey: #efefef;
+  --color-light-black: #787c81;
+  --color-black: #2c3337;
+  --bg-transparent: rgba(0, 0, 0, 0.75);
+  --small-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --transparent-black: rgba(0, 0, 0, 0.5);
 }
 
 :root {
-    --type-fire: #ff9c54;
-    --type-grass: #63bb5b;
-    --type-water: #4d90d5;
-    --type-normal: #9099a1;
-    --type-fighting: #ce4069;
-    --type-flying: #92aade;
-    --type-poison: #ab6ac8;
-    --type-rock: #c7b78b;
-    --type-ground: #d97746;
-    --type-bug: #90c12c;
-    --type-ghost: #5269ac;
-    --type-steel: #5a8ea1;
-    --type-electric: #f3d23b;
-    --type-psychic: #f97176;
-    --type-ice: #74cec0;
-    --type-dragon: #096dc4;
-    --type-dark: #5a5366;
-    --type-fairy: #ec8fe6;
+  --type-fire: #ff9c54;
+  --type-grass: #63bb5b;
+  --type-water: #4d90d5;
+  --type-normal: #9099a1;
+  --type-fighting: #ce4069;
+  --type-flying: #92aade;
+  --type-poison: #ab6ac8;
+  --type-rock: #c7b78b;
+  --type-ground: #d97746;
+  --type-bug: #90c12c;
+  --type-ghost: #5269ac;
+  --type-steel: #5a8ea1;
+  --type-electric: #f3d23b;
+  --type-psychic: #f97176;
+  --type-ice: #74cec0;
+  --type-dragon: #096dc4;
+  --type-dark: #5a5366;
+  --type-fairy: #ec8fe6;
 }
