@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const FormsPokesection = ({ dataFormSpecie }) => {
   const [modalActive, setModalActive] = useState(false);
+  const [clickedForm, setClickedForm] = useState("");
 
   const pokemonForms = dataFormSpecie?.varieties
     ?.filter(({ is_default }) => !is_default)
@@ -15,7 +16,14 @@ const FormsPokesection = ({ dataFormSpecie }) => {
       };
     });
 
-  const openModal = () => setModalActive(true);
+  const selectedForm = pokemonForms.find(
+    (form) => form.pokemon.name === clickedForm
+  );
+
+  const openModal = (item) => {
+    setModalActive(true);
+    setClickedForm(item.pokemon.name);
+  };
   const closeModal = () => setModalActive(false);
 
   return (
@@ -24,7 +32,7 @@ const FormsPokesection = ({ dataFormSpecie }) => {
         <section className="formsSection">
           {pokemonForms.map((form) => (
             <div className="formSprite" key={form.pokemon.name}>
-              <figure onClick={openModal} className="posRel">
+              <figure onClick={() => openModal(form)} className="posRel">
                 <img src={form.sprite} alt="formSprite" />
                 <figcaption>
                   {form.pokemon.name.replaceAll("-", " ")}
@@ -33,7 +41,7 @@ const FormsPokesection = ({ dataFormSpecie }) => {
               <ModalPokeform
                 close={closeModal}
                 modalActive={modalActive}
-                formData={form}
+                formData={selectedForm}
               />
             </div>
           ))}
