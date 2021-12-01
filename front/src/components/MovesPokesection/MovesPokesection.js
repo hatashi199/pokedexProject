@@ -9,7 +9,7 @@ const MovesPokesection = ({ dataMovePokemon }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [movesPerPage] = useState(10);
 
-  useEffect(async () => {
+  useEffect(() => {
     const getMoveInfo = async () => {
       try {
         setLoading(true);
@@ -26,7 +26,7 @@ const MovesPokesection = ({ dataMovePokemon }) => {
       }
     };
     getMoveInfo();
-  }, []);
+  }, [dataMovePokemon.moves]);
 
   const indexOfLastMove = currentPage * movesPerPage;
   const indexOfFirstPokemon = indexOfLastMove - movesPerPage;
@@ -50,7 +50,19 @@ const MovesPokesection = ({ dataMovePokemon }) => {
                       {item.name.replaceAll("-", " ")}
                     </td>
                     <td>{flavor[flavor.length - 1].flavor_text}</td>
-                    <td>{item.type.name}</td>
+                    <td>
+                      <span
+                        className={item.type.name}
+                        style={{
+                          color: "#FFF",
+                          padding: "0.5rem",
+                          borderRadius: "6px",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        {item.type.name}
+                      </span>
+                    </td>
                     <td>{item.damage_class.name}</td>
                     <td>{item.power === null ? "---" : item.power}</td>
                     <td>{item.accuracy === null ? "---" : item.accuracy}</td>

@@ -1,9 +1,13 @@
-import ModalPokeform from "../ModalPokeform/ModalPokeform";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { getAxios } from "../../helpers";
+import ModalContent from "../ModalPokeForm/ModalContent";
+import { BackdropModal, StyledModal } from "../ModalPokeForm/StyledModal";
 
 const FormsPokesection = ({ dataFormSpecie }) => {
-  const [modalActive, setModalActive] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [clickedForm, setClickedForm] = useState("");
+  const [formInfo, setFormInfo] = useState("");
+  const [abilityFormInfo, setAbilityFormInfo] = useState("");
 
   const pokemonForms = dataFormSpecie?.varieties
     ?.filter(({ is_default }) => !is_default)
@@ -16,15 +20,40 @@ const FormsPokesection = ({ dataFormSpecie }) => {
       };
     });
 
-  const selectedForm = pokemonForms.find(
+  const handleCloseModal = () => setOpenModal(false);
+  const handleOpenModal = (item) => {
+    setOpenModal(true);
+    setClickedForm(item.pokemon.name);
+  };
+
+  const clickedPokemonForm = pokemonForms?.find(
     (form) => form.pokemon.name === clickedForm
   );
 
-  const openModal = (item) => {
-    setModalActive(true);
-    setClickedForm(item.pokemon.name);
-  };
-  const closeModal = () => setModalActive(false);
+  const getInfoForm = useCallback(async () => {
+    try {
+      const dataForm =
+        clickedPokemonForm && (await getAxios(clickedPokemonForm?.pokemon.url));
+      setFormInfo(dataForm);
+
+      const dataAbility =
+        dataForm &&
+        (await Promise.all(
+          dataForm.abilities.map(async ({ ability }) => {
+            const abilityInfo = await getAxios(ability.url);
+            return abilityInfo;
+          })
+        ));
+
+      setAbilityFormInfo(dataAbility);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [clickedPokemonForm?.pokemon.url]);
+
+  useEffect(() => {
+    getInfoForm();
+  }, [getInfoForm]);
 
   return (
     <>
@@ -32,17 +61,26 @@ const FormsPokesection = ({ dataFormSpecie }) => {
         <section className="formsSection">
           {pokemonForms.map((form) => (
             <div className="formSprite" key={form.pokemon.name}>
-              <figure onClick={() => openModal(form)} className="posRel">
+              <figure className="posRel" onClick={() => handleOpenModal(form)}>
                 <img src={form.sprite} alt="formSprite" />
                 <figcaption>
                   {form.pokemon.name.replaceAll("-", " ")}
                 </figcaption>
               </figure>
-              <ModalPokeform
-                close={closeModal}
-                modalActive={modalActive}
-                formData={selectedForm}
-              />
+              <StyledModal
+                open={openModal}
+                onClose={handleCloseModal}
+                BackdropComponent={BackdropModal}
+              >
+                <div className="posRel">
+                  <ModalContent
+                    close={handleCloseModal}
+                    clicked={clickedPokemonForm}
+                    dataForm={formInfo}
+                    dataAbilityForm={abilityFormInfo}
+                  />
+                </div>
+              </StyledModal>
             </div>
           ))}
           {dataFormSpecie?.varieties.length <= 1 && <h3>No tiene formas</h3>}

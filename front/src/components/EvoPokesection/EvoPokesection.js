@@ -41,7 +41,7 @@ const EvoPokesection = ({ dataEvoSpecie }) => {
       }
     };
     getEvoChain();
-  }, []);
+  }, [dataEvoSpecie.evolution_chain.url]);
 
   return (
     <section>

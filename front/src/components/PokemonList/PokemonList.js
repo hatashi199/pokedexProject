@@ -12,7 +12,7 @@ const PokemonList = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonPerPage, setPokemonPerPage] = useState(40);
+  const [pokemonPerPage] = useState(40);
 
   useEffect(() => {
     const getInfoPokedex = async () => {
