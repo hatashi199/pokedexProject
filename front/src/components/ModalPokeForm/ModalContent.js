@@ -23,15 +23,19 @@ const ModalContent = ({ close, clicked, dataForm, dataAbilityForm }) => {
       {dataForm && (
         <>
           <section>
-            <figure className={dataForm.types[0].type.name}>
-              <img src={clicked.sprite} alt="sprite_form" />
+            <figure>
+              <img
+                src={clicked.sprite}
+                alt="sprite_form"
+                style={{ width: `50%` }}
+              />
             </figure>
-            <div>
-              <h3>{clicked.pokemon.name}</h3>
+            <div className="formName_Types">
+              <h3>{clicked.pokemon.name.split("-").join(" ")}</h3>
               <PokeTypes dataTypes={dataForm.types} />
             </div>
           </section>
-          <section>
+          <section className="formAbility">
             <AbilityFormSection
               dataAbilityForm={dataAbilityForm}
               dataForm={dataForm}

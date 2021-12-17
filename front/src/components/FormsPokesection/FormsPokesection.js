@@ -72,7 +72,11 @@ const FormsPokesection = ({ dataFormSpecie }) => {
                 onClose={handleCloseModal}
                 BackdropComponent={BackdropModal}
               >
-                <div className="posRel">
+                <div
+                  className={`posRel modalContent ${
+                    formInfo && formInfo.types[0].type.name
+                  }`}
+                >
                   <ModalContent
                     close={handleCloseModal}
                     clicked={clickedPokemonForm}

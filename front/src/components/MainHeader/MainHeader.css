@@ -1,4 +1,4 @@
-header {
+header.mainHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,10 +7,10 @@ header {
   padding: 1.5rem 2rem;
 }
 
-header > figure {
+header.mainHeader > figure {
   width: 10%;
 }
 
-header > figure > img {
+header.mainHeader > figure > img {
   width: 100%;
 }

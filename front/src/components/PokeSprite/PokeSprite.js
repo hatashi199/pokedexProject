@@ -6,11 +6,14 @@ const PokeSprite = ({ dataPokemon }) => {
       ? `#0${dataPokemon.entry_number}`
       : `#${dataPokemon.entry_number}`;
 
+  const idSpriteArray = dataPokemon?.pokemon_species.url.split("/");
+  const idSprite = idSpriteArray[idSpriteArray.length - 2];
+
   return (
     <div className="boxSprite posRel">
       <figure key={dataPokemon.sprite}>
         <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dataPokemon.entry_number}.png`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${idSprite}.png`}
           alt="sprite_pokemon"
         />
       </figure>
