@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { getAxios } from "../../helpers";
 import Loading from "../Loading/Loading";
 import Pagination from "../Pagination/Pagination";
-import { FormControl, InputBase, MenuItem, Select } from "@mui/material";
 import { GoSearch } from "react-icons/go";
+import { Input, Select } from "@chakra-ui/react";
+import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 
 const PokemonList = () => {
   const [pokemonInfo, setPokemonInfo] = useState("");
@@ -16,7 +17,6 @@ const PokemonList = () => {
   const [search, setSearch] = useState("");
   const [typePokedex, setTypePokedex] = useState("");
   const [selectPokedex, setSelectPokedex] = useState("national");
-  const [orderSelect, setOrderSelect] = useState("");
 
   useEffect(() => {
     const getInfoPokedex = async () => {
@@ -77,35 +77,34 @@ const PokemonList = () => {
     });
   };
 
-  const orderSelectFilters = () => {
-    if (orderSelect === "alfaASC") {
-      pokemonInfo.pokemon_entries.sort((a, b) =>
-        b.pokemon_species.name.localeCompare(a.pokemon_species.name)
-      );
-    }
+  const handleSortA_Z = () => {
+    const sorted = pokemonInfo.pokemon_entries.sort((a, b) => {
+      if (a.pokemon_species.name > b.pokemon_species.name) {
+        return 1;
+      }
 
-    if (orderSelect === "alfaDESC") {
-      pokemonInfo.pokemon_entries.sort((a, b) =>
-        a.pokemon_species.name.localeCompare(b.pokemon_species.name)
-      );
-    }
+      if (a.pokemon_species.name < b.pokemon_species.name) {
+        return -1;
+      }
+      return 0;
+    });
 
-    if (orderSelect === "numASC") {
-      pokemonInfo.pokemon_entries.sort((a, b) =>
-        a.entry_number > b.entry_number ? 1 : -1
-      );
-    }
-
-    if (orderSelect === "numDESC") {
-      pokemonInfo.pokemon_entries.sort((a, b) =>
-        a.entry_number < b.entry_number ? 1 : -1
-      );
-    }
+    setPokemonInfo({ ...pokemonInfo, pokemon_entries: sorted });
   };
 
-  const handleOrderSelect = (e) => {
-    setOrderSelect(e.target.value);
-    orderSelectFilters();
+  const handleSortZ_A = () => {
+    const sorted = pokemonInfo.pokemon_entries.sort((a, b) => {
+      if (a.pokemon_species.name > b.pokemon_species.name) {
+        return -1;
+      }
+
+      if (a.pokemon_species.name < b.pokemon_species.name) {
+        return 1;
+      }
+      return 0;
+    });
+
+    setPokemonInfo({ ...pokemonInfo, pokemon_entries: sorted });
   };
 
   const handlePokedexSelect = (e) => {
@@ -116,13 +115,15 @@ const PokemonList = () => {
 
   return (
     <>
-      {loading && <Loading />}
       {pokemonInfo && (
         <section className="pokedexBox posRel">
-          <header className="mainTitle_Search center">
-            <h2>{pokemonInfo?.name + " Pokedex"}</h2>
+          <h2 className="mainTitle_PokedexName">
+            {pokemonInfo?.name + " Pokedex"}
+          </h2>
+          <header className="filterNav center">
             <div className="posRel searchBox">
-              <InputBase
+              <Input
+                variant="filled"
                 sx={{
                   borderBottom: `2px solid #c0392b`,
                   width: `100%`,
@@ -131,48 +132,64 @@ const PokemonList = () => {
                 placeholder="Search Pokemon"
                 type="search"
                 onChange={handleOnChange}
+                focusBorderColor="#c0392b"
               />
-              <GoSearch
-                size="1.3rem"
-                onClick={search.length > 0 ? handleOnChange : null}
-                className="searchIcon"
-              />
+              <div className="searchIcon">
+                <GoSearch size="1.3rem" color="#FFF" />
+              </div>
             </div>
             <div className="orderPokedex_Filter">
-              <FormControl variant="standard">
-                <Select value={orderSelect} onChange={handleOrderSelect}>
-                  <MenuItem value="alfaASC">A - Z</MenuItem>
-                  <MenuItem value="alfaDESC">Z - A</MenuItem>
-                  <MenuItem value="numASC">Numérico Ascendente</MenuItem>
-                  <MenuItem value="numDESC">Numérico Descendente</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl variant="standard">
-                <Select value={selectPokedex} onChange={handlePokedexSelect}>
-                  {typePokedex &&
-                    typePokedex.map((pokedex) => {
-                      const firstCapitalize =
-                        pokedex.charAt(0).toUpperCase() + pokedex.slice(1);
-                      const pokedexName = firstCapitalize.split("-").join(" ");
-                      return (
-                        <MenuItem key={pokedexName} value={pokedex}>
-                          {pokedexName}
-                        </MenuItem>
-                      );
-                    })}
-                </Select>
-              </FormControl>
+              <div className="orderIcons">
+                <div onClick={handleSortA_Z}>
+                  <BsSortAlphaDown size="1.5rem" color="#FFF" />
+                </div>
+                <div onClick={handleSortZ_A}>
+                  <BsSortAlphaDownAlt size="1.5rem" color="#FFF" />
+                </div>
+              </div>
+              <Select
+                variant="filled"
+                value={selectPokedex}
+                onChange={handlePokedexSelect}
+                focusBorderColor="#c0392b"
+              >
+                {typePokedex &&
+                  typePokedex.map((pokedex) => {
+                    const firstCapitalize =
+                      pokedex.charAt(0).toUpperCase() + pokedex.slice(1);
+                    const pokedexName = firstCapitalize.split("-").join(" ");
+                    return (
+                      <option key={pokedexName} value={pokedex}>
+                        {pokedexName}
+                      </option>
+                    );
+                  })}
+              </Select>
             </div>
           </header>
-          {!loading && (
+          {!loading ? (
             <>
+              {currentPokemons.length === 0 && (
+                <p
+                  style={{
+                    textAlign: "center",
+                    width: "100%",
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  There isn't any pokemon with that{" "}
+                  <span className="noPokeFilter">{search}</span> name or similar
+                </p>
+              )}
               <div className="pokemonList center">
                 {currentPokemons?.map((pokemon) => {
+                  const idPokeArray = pokemon?.pokemon_species.url.split("/");
+                  const idSprite = idPokeArray[idPokeArray.length - 2];
                   return (
                     <Link
                       key={pokemon.entry_number}
                       to={{
-                        pathname: `/pokemons/${pokemon.entry_number}`,
+                        pathname: `/pokemons/${idSprite}`,
                       }}
                     >
                       <PokeSprite dataPokemon={pokemon} />
@@ -180,14 +197,18 @@ const PokemonList = () => {
                   );
                 })}
               </div>
-              <Pagination
-                totalElements={pokemonInfo.pokemon_entries.length}
-                elementsPerPage={pokemonPerPage}
-                paginate={(pageNumber) => setCurrentPage(pageNumber)}
-                updateCurrentPage={setCurrentPage}
-                currentPage={currentPage}
-              />
+              {currentPokemons.length > 0 && (
+                <Pagination
+                  totalElements={pokemonInfo.pokemon_entries.length}
+                  elementsPerPage={pokemonPerPage}
+                  paginate={(pageNumber) => setCurrentPage(pageNumber)}
+                  updateCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                />
+              )}
             </>
+          ) : (
+            <Loading />
           )}
         </section>
       )}

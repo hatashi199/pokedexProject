@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { getAxios } from "../../helpers";
-import { FiPlusCircle } from "react-icons/fi";
-import { BsDashCircle } from "react-icons/bs";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
 
 const AbilitiesSection = ({ dataAbilities }) => {
-  const [abilityActive, setAbilityActive] = useState({
-    element: "",
-    active: false,
-  });
   const [abilityInfo, setAbilityInfo] = useState("");
 
   useEffect(() => {
@@ -42,43 +43,20 @@ const AbilitiesSection = ({ dataAbilities }) => {
       {dataAbilities &&
         dataAbilities.map(({ ability, is_hidden }, index) => {
           return (
-            <section key={ability.name}>
-              <div
-                className="acordionHeader"
-                onClick={() =>
-                  setAbilityActive({
-                    element: ability.name,
-                    active:
-                      abilityActive.element === ability.name
-                        ? !abilityActive.active
-                        : true,
-                  })
-                }
-              >
-                <h3>{is_hidden ? "Hidden Ability" : "Ability"}</h3>
-                {abilityActive.active &&
-                abilityActive.element === ability.name ? (
-                  <BsDashCircle size="1.2rem" color="#2c3337" />
-                ) : (
-                  <FiPlusCircle size="1.2rem" color="#2c3337" />
-                )}
-              </div>
-              <div
-                className="abilityDetail"
-                style={
-                  abilityActive.element === ability.name && abilityActive.active
-                    ? {
-                        opacity: 1,
-                        maxHeight: 100 + "px",
-                        padding: 1 + "rem",
-                      }
-                    : null
-                }
-              >
-                <h5>"{ability.name.replaceAll("-", " ")}"</h5>
-                {abilityInfo && <p>{abilityInfo[index]?.flavor}</p>}
-              </div>
-            </section>
+            <Accordion key={ability.name} allowToggle>
+              <AccordionItem>
+                <h3>
+                  <AccordionButton className="acordionHeader">
+                    {is_hidden ? "Hidden Ability" : "Ability"}
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h3>
+                <AccordionPanel className="abilityDetail">
+                  <h5>"{ability.name.replaceAll("-", " ")}"</h5>
+                  {abilityInfo && <p>{abilityInfo[index]?.flavor}</p>}
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
           );
         })}
     </div>

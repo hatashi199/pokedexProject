@@ -1,12 +1,11 @@
 .loadingGif {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   overflow: hidden;
 }
 
 .loadingGif > img {
-  width: 100%;
+  width: 10%;
 }

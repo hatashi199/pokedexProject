@@ -1,16 +1,20 @@
 header.mainHeader {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-red);
-  border-bottom: 1px solid var(--color-white);
   padding: 1.5rem 2rem;
+  z-index: 9999;
+  box-shadow: var(--small-shadow);
 }
 
-header.mainHeader > figure {
-  width: 10%;
+header.mainHeader > .mainLogo {
+  width: 12%;
+  cursor: pointer;
 }
 
-header.mainHeader > figure > img {
+header.mainHeader > .mainLogo img {
   width: 100%;
 }

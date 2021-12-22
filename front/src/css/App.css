@@ -1,28 +1,28 @@
-@import url('../css/allImports.css');
+@import url("../css/allImports.css");
 
 /*-- GENERAL --*/
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 .posRel {
-    position: relative;
+  position: relative;
 }
 
 body {
-    font-size: 15px;
-    font-family: 'OpenSans-Regular', sans-serif;
-    background-color: var(--color-light-grey);
-    color: var(--color-black);
+  font-size: 15px;
+  font-family: "OpenSans-Regular", sans-serif;
+  background-color: var(--color-light-grey) !important;
+  color: var(--color-black);
 }
 
 h1,
@@ -31,14 +31,14 @@ h3,
 h4,
 h5,
 h6 {
-    color: var(--color-black);
+  color: var(--color-black);
 }
 
 p,
 span {
-    color: var(--color-light-black);
+  color: var(--color-light-black);
 }
 
 .center {
-    width: 80%;
+  width: 80%;
 }

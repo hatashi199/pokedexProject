@@ -13,13 +13,13 @@
   gap: 3.5rem;
 }
 
-header.mainTitle_Search > h2 {
-  font-size: 3rem;
+h2.mainTitle_PokedexName {
+  font-size: 4rem;
   font-weight: 600;
   text-transform: capitalize;
 }
 
-header.mainTitle_Search {
+header.filterNav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -32,7 +32,16 @@ header.mainTitle_Search {
 }
 
 .searchIcon {
+  background-color: var(--color-red);
   cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 1rem;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  box-shadow: var(--small-shadow);
 }
 
 .orderPokedex_Filter {
@@ -40,4 +49,23 @@ header.mainTitle_Search {
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+}
+
+.orderIcons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.orderIcons > div {
+  background-color: var(--color-red);
+  border-radius: 50%;
+  padding: 0.5rem;
+  box-shadow: var(--small-shadow);
+  cursor: pointer;
+}
+
+.noPokeFilter {
+  font-weight: 700;
+  font-size: 2rem;
 }
