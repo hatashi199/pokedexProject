@@ -6,7 +6,7 @@ header.mainHeader {
   align-items: center;
   background-color: var(--color-red);
   padding: 1.5rem 2rem;
-  z-index: 9999;
+  z-index: 1000;
   box-shadow: var(--small-shadow);
 }
 

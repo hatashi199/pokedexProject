@@ -5,7 +5,8 @@
   z-index: 9999;
   background-color: var(--color-red);
   box-shadow: var(--small-shadow);
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .slideRightMenu > ul {

@@ -58,37 +58,44 @@ const FormsPokesection = ({ dataFormSpecie }) => {
   return (
     <>
       {dataFormSpecie && (
-        <section className="formsSection">
-          {pokemonForms.map((form) => (
-            <div className="formSprite" key={form.pokemon.name}>
-              <figure className="posRel" onClick={() => handleOpenModal(form)}>
-                <img src={form.sprite} alt="formSprite" />
-                <figcaption>
-                  {form.pokemon.name.replaceAll("-", " ")}
-                </figcaption>
-              </figure>
-              <StyledModal
-                open={openModal}
-                onClose={handleCloseModal}
-                BackdropComponent={BackdropModal}
-              >
-                <div
-                  className={`posRel modalContent ${
-                    formInfo && formInfo.types[0].type.name
-                  }`}
+        <>
+          <section className="formsSection">
+            {pokemonForms.map((form) => (
+              <div className="formSprite" key={form.pokemon.name}>
+                <figure
+                  className="posRel"
+                  onClick={() => handleOpenModal(form)}
                 >
-                  <ModalContent
-                    close={handleCloseModal}
-                    clicked={clickedPokemonForm}
-                    dataForm={formInfo}
-                    dataAbilityForm={abilityFormInfo}
-                  />
-                </div>
-              </StyledModal>
-            </div>
-          ))}
-          {dataFormSpecie?.varieties.length <= 1 && <h3>No tiene formas</h3>}
-        </section>
+                  <img src={form.sprite} alt="formSprite" />
+                  <figcaption>
+                    {form.pokemon.name.replaceAll("-", " ")}
+                  </figcaption>
+                </figure>
+                <StyledModal
+                  open={openModal}
+                  onClose={handleCloseModal}
+                  BackdropComponent={BackdropModal}
+                >
+                  <div
+                    className={`posRel modalContent ${
+                      formInfo && formInfo.types[0].type.name
+                    }`}
+                  >
+                    <ModalContent
+                      close={handleCloseModal}
+                      clicked={clickedPokemonForm}
+                      dataForm={formInfo}
+                      dataAbilityForm={abilityFormInfo}
+                    />
+                  </div>
+                </StyledModal>
+              </div>
+            ))}
+          </section>
+          {dataFormSpecie?.varieties.length <= 1 && (
+            <h3 className="noForms">It has no forms</h3>
+          )}
+        </>
       )}
     </>
   );

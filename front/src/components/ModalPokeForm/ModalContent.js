@@ -14,14 +14,14 @@ const ModalContent = ({ close, clicked, dataForm, dataAbilityForm }) => {
 
   return (
     <>
-      <MdOutlineClose
-        size={"2rem"}
-        color="#2c3337"
-        onClick={close}
-        style={styleCloseButton}
-      />
       {dataForm && (
         <>
+          <MdOutlineClose
+            size={"2rem"}
+            color="#2c3337"
+            onClick={close}
+            style={styleCloseButton}
+          />
           <section>
             <figure>
               <img
@@ -35,12 +35,11 @@ const ModalContent = ({ close, clicked, dataForm, dataAbilityForm }) => {
               <PokeTypes dataTypes={dataForm.types} />
             </div>
           </section>
-          <section className="formAbility">
-            <AbilityFormSection
-              dataAbilityForm={dataAbilityForm}
-              dataForm={dataForm}
-            />
-          </section>
+          {dataAbilityForm && (
+            <section className="formAbility">
+              <AbilityFormSection dataAbilityForm={dataAbilityForm} />
+            </section>
+          )}
         </>
       )}
     </>

@@ -4,18 +4,21 @@ import PokeTypes from "../PokeTypes/PokeTypes";
 import { useEffect, useState } from "react";
 import { getAxios } from "../../helpers";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import Loading from "../Loading/Loading";
 
 const InfoCompletePokemon = () => {
   const { pokeId } = useParams();
 
   const [pokemonData, setPokemonData] = useState("");
   const [specieData, setSpecieData] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
     const getPokemonData = async () => {
       try {
+        setLoading(true);
         const pokemon = await getAxios(
           `https://pokeapi.co/api/v2/pokemon/${pokeId}`
         );
@@ -25,6 +28,7 @@ const InfoCompletePokemon = () => {
           `https://pokeapi.co/api/v2/pokemon-species/${pokeId}`
         );
         setSpecieData(specie);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -34,7 +38,7 @@ const InfoCompletePokemon = () => {
 
   return (
     <>
-      {pokemonData && specieData && (
+      {!loading && pokemonData && specieData ? (
         <section className="pokeInfoComplete center">
           <section className="pokeInfo_Section1">
             <div className="pokeInfo_Card">
@@ -59,6 +63,8 @@ const InfoCompletePokemon = () => {
             <PokeData dataPokemon={pokemonData} dataSpecie={specieData} />
           )}
         </section>
+      ) : (
+        <Loading />
       )}
     </>
   );

@@ -44,3 +44,9 @@
   align-items: center;
   z-index: 2;
 }
+
+.noForms {
+  font-size: 1.2rem;
+  color: var(--color-light-black);
+  text-align: center;
+}

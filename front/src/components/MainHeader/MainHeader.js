@@ -4,7 +4,7 @@ import MenuOptions from "../MenuOptions/MenuOptions";
 const MainHeader = () => {
   return (
     <>
-      <header className="mainHeader">
+      <header className="mainHeader posRel">
         <a href="/pokemons" className="mainLogo">
           <figure>
             <img src={logoNav} alt="logo-pokeAMF" />

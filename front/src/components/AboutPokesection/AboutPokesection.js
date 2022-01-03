@@ -34,7 +34,6 @@ const AboutPokesection = ({ dataAboutPoke, dataAboutSpecie }) => {
               <li>Height</li>
               <li>Weight</li>
               <li>Gender Rate</li>
-              <li>Weakness Types</li>
             </ul>
             <ul>
               <li>{genus}</li>
@@ -60,7 +59,6 @@ const AboutPokesection = ({ dataAboutPoke, dataAboutSpecie }) => {
                   </>
                 )}
               </li>
-              <li>Types</li>
             </ul>
           </div>
           <figure className="aboutSection_Shiny">

@@ -12,6 +12,7 @@ const PokeTypes = ({ dataTypes }) => {
             return <TypeBlock key={uuidv4()} TypeIcon={TypeIcon} type={type} />;
           }
         }
+        return null;
       })}
     </div>
   );

@@ -31,21 +31,24 @@
 
 .formAbility {
   background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 
-.abilityName {
-  color: var(--color-white);
-  text-transform: capitalize;
+.formAbility > h4 {
+  font-weight: 700;
+  font-size: 1.4rem;
 }
 
-.abilityInfo {
-  color: var(--color-white);
-  /* padding: 1rem; */
+.formAbility h3 > button {
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 
-.formName_Types,
-.formAbility {
+.formName_Types {
   padding: 2rem;
 }

@@ -7,14 +7,9 @@
   border-radius: 3px;
 }
 
-.abilitiesSection > section {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 40%;
-  width: 100%;
-  border: 3px solid var(--color-red);
-  border-radius: 10px;
+.abilitiesSection h3 > button {
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 
 .acordionHeader {
@@ -40,4 +35,9 @@
 .abilityDetail h5 {
   text-transform: capitalize;
   font-style: italic;
+  font-size: 1.2rem;
+}
+
+.abilityDetail p {
+  font-size: 1.2rem;
 }
