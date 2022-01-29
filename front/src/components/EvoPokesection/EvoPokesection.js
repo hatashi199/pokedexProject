@@ -65,8 +65,6 @@ const EvoPokesection = ({ dataEvoSpecie }) => {
     getEvos();
   }, [dataEvoSpecie.evolution_chain.url]);
 
-  console.log(pokeEvos);
-
   return (
     <section className="pokeEvos_Box">
       {pokeEvos && (

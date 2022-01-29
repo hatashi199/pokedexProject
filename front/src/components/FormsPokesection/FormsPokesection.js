@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAxios } from "../../helpers";
 import ModalContent from "../ModalPokeForm/ModalContent";
 import { BackdropModal, StyledModal } from "../ModalPokeForm/StyledModal";
@@ -30,30 +30,32 @@ const FormsPokesection = ({ dataFormSpecie }) => {
     (form) => form.pokemon.name === clickedForm
   );
 
-  const getInfoForm = useCallback(async () => {
-    try {
-      const dataForm =
-        clickedPokemonForm && (await getAxios(clickedPokemonForm?.pokemon.url));
-      setFormInfo(dataForm);
-
-      const dataAbility =
-        dataForm &&
-        (await Promise.all(
-          dataForm.abilities.map(async ({ ability }) => {
-            const abilityInfo = await getAxios(ability.url);
-            return abilityInfo;
-          })
-        ));
-
-      setAbilityFormInfo(dataAbility);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [clickedPokemonForm?.pokemon.url]);
+  console.log(clickedPokemonForm);
 
   useEffect(() => {
+    const getInfoForm = async () => {
+      try {
+        const dataForm =
+          clickedPokemonForm &&
+          (await getAxios(clickedPokemonForm?.pokemon.url));
+        setFormInfo(dataForm);
+
+        const dataAbility =
+          dataForm &&
+          (await Promise.all(
+            dataForm.abilities.map(async ({ ability }) => {
+              const abilityInfo = await getAxios(ability.url);
+              return abilityInfo;
+            })
+          ));
+
+        setAbilityFormInfo(dataAbility);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getInfoForm();
-  }, [getInfoForm]);
+  }, [clickedPokemonForm?.pokemon.url]);
 
   return (
     <>
@@ -81,12 +83,14 @@ const FormsPokesection = ({ dataFormSpecie }) => {
                       formInfo && formInfo.types[0].type.name
                     }`}
                   >
-                    <ModalContent
-                      close={handleCloseModal}
-                      clicked={clickedPokemonForm}
-                      dataForm={formInfo}
-                      dataAbilityForm={abilityFormInfo}
-                    />
+                    {abilityFormInfo && (
+                      <ModalContent
+                        close={handleCloseModal}
+                        clicked={clickedPokemonForm}
+                        dataForm={formInfo}
+                        dataAbilityForm={abilityFormInfo}
+                      />
+                    )}
                   </div>
                 </StyledModal>
               </div>
