@@ -120,7 +120,7 @@ const EvoPokesection = ({ dataEvoSpecie }) => {
               {pokeEvos[2].map((chainEvo) => {
                 return (
                   <Link
-                    to={{ pathname: `/pokemon/${chainEvo.id}` }}
+                    to={{ pathname: `/pokemons/${chainEvo.id}` }}
                     className="arrowSprite_Evo"
                     key={chainEvo.name}
                   >
